@@ -46,9 +46,9 @@ def printEscpos():
                 ), 422)
 
             # print to thermal escpos
-            printer = Network(host=ipPrintert, port=9100, timeout=60)
-            # printer.image(imgdata)
-            # printer.cut()
+            printer = Network(host=ipPrintert, port=9100, timeout=30)
+            printer.image(imgdata)
+            printer.cut()
 
             print("======================WITECH==========", printer)
             # printer.cashdraw('pin')
