@@ -1,6 +1,9 @@
+import os, subprocess
+import sys
 from app import app, service
 from flask import Flask, flash, request, jsonify, make_response
 from escpos.printer import Network
+import logging
 
 @app.route('/', methods = ['GET'])
 def index():
@@ -13,7 +16,7 @@ def index():
     )
 
 @app.route('/print', methods = ['POST'])
-def print():
+def printEscpos():
     if request.method == "POST":
         # get json data from request
         requestBody = request.get_json()
@@ -44,9 +47,10 @@ def print():
 
             # print to thermal escpos
             printer = Network(host=ipPrintert, port=9100, timeout=60)
-            printer.image(imgdata)
-            printer.cut()
+            # printer.image(imgdata)
+            # printer.cut()
 
+            print("======================WITECH==========", printer)
             # printer.cashdraw('pin')
 
             return make_response(
@@ -57,6 +61,7 @@ def print():
                 200
             )
         except Exception as e:
+            logging.exception(e)
             return make_response(jsonify(
                 message=e,
                 success=False

@@ -19,6 +19,7 @@ pycparser==2.20
 pylint==2.6.0
 pyOpenSSL==19.1.0
 pyserial==3.4
+python-dotenv==0.14.0
 python-escpos==2.2.0
 pyusb==1.1.0
 PyYAML==5.3.1
