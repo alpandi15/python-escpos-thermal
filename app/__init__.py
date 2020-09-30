@@ -13,4 +13,4 @@ from app import controller
 
 if __name__ == "__main__":
    logging.basicConfig(filename='error.log',level=logging.DEBUG)
-   app.run(host='0.0.0.0', port=5000)
+   app.run(host='0.0.0.0', port=5000, ssl_context=('ssl/cert.pem', 'ssl/key.pem'))
