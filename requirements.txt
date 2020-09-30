@@ -1,7 +1,9 @@
 appdirs==1.4.4
 argcomplete==1.12.1
 astroid==2.4.2
+cffi==1.14.3
 click==7.1.2
+cryptography==3.1.1
 Flask==1.1.2
 Flask-Cors==3.0.9
 importlib-metadata==2.0.0
@@ -13,7 +15,9 @@ MarkupSafe==1.1.1
 mccabe==0.6.1
 Pillow==7.2.0
 pkg-resources==0.0.0
+pycparser==2.20
 pylint==2.6.0
+pyOpenSSL==19.1.0
 pyserial==3.4
 python-escpos==2.2.0
 pyusb==1.1.0

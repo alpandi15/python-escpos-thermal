@@ -1,7 +1,6 @@
-from app import app
+from app import app, service
 from flask import Flask, flash, request, jsonify, make_response
 from escpos.printer import Network
-from base64 import b64decode
 
 @app.route('/', methods = ['GET'])
 def index():
@@ -16,10 +15,25 @@ def index():
 @app.route('/print', methods = ['POST'])
 def print():
     if request.method == "POST":
-        fileString = request.get_json()
-        printer = Network('192.168.1.216')
-        printer.text("Hello World\n")
-        printer.barcode('1324354657687', 'EAN13', 64, 2, '', '')
+        requestBody = request.get_json()
+        fileString = requestBody.get('image', False)
+
+        if fileString == '' or fileString == False:
+            return make_response(jsonify(
+                message='Required image',
+                success=False
+            ), 422)
+
+        imgdata = service.base64ToImage(fileString)
+
+        if imgdata == '' or imgdata == False:
+            return make_response(jsonify(
+                message='Convert base64 to image error',
+                success=False
+            ), 422)
+
+        printer = Network(host='192.168.1.216')
+        printer.image(imgdata)
         printer.cut()
 
         return make_response(

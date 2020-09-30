@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
+import sys
 import logging
 
 app = Flask(__name__)
@@ -9,8 +10,8 @@ cors = CORS(app, reqources={
       "origins": "*"
    }
 })
-from app import controller
+from app import controller, service
 
 if __name__ == "__main__":
    logging.basicConfig(filename='error.log',level=logging.DEBUG)
-   app.run(host='0.0.0.0', port=5000, ssl_context=('ssl/cert.pem', 'ssl/key.pem'))
+   app.run(host='0.0.0.0', port=5000, ssl_context=('ssl/cert.pem', 'ssl/key.pem'), debug=True)
