@@ -9,9 +9,8 @@ cors = CORS(app, reqources={
       "origins": "*"
    }
 })
-from app import controller, service
+from app import controller
 
 if __name__ == "__main__":
    logging.basicConfig(filename='error.log',level=logging.DEBUG)
    app.run(host='0.0.0.0', port=5000)
-

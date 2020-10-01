@@ -1,9 +1,7 @@
-FLASK_ENV=production
+FLASK_ENV=development
 FLASK_APP=main.py
 FLASK_DEBUG=1
 
-FLASK_RUN_HOST=192.168.1.23
+FLASK_RUN_HOST=localhost
 FLASK_RUN_PORT=4000
 
-FLASK_RUN_CERT=cert.pem
-FLASK_RUN_KEY=key.pem

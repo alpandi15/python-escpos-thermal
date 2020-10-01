@@ -1,5 +1,4 @@
 import os, subprocess
-import sys
 from app import app, service
 from flask import Flask, flash, request, jsonify, make_response
 from escpos.printer import Network
