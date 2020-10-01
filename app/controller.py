@@ -2,6 +2,7 @@ import os, subprocess
 from app import app, service
 from flask import Flask, flash, request, jsonify, make_response
 from escpos.printer import Network
+from escpos.exceptions import Error
 import logging
 
 @app.route('/', methods = ['GET'])
@@ -49,7 +50,6 @@ def printEscpos():
             printer.image(imgdata)
             printer.cut()
 
-            print("======================WITECH==========", printer)
             # printer.cashdraw('pin')
 
             return make_response(
@@ -60,8 +60,41 @@ def printEscpos():
                 200
             )
         except Exception as e:
-            logging.exception(e)
+            message = str(e)
+            logging.exception(message)
+
             return make_response(jsonify(
-                message=e,
-                success=False
+                message='Failed print to thermal '+ipPrintert,
+                success=False,
+                detail=message
             ), 500)
+
+@app.route('/check-connection', methods = ['GET'])
+def checkConnection():
+    try:
+        ipPrintert = request.args.get('ip', False)
+        if ipPrintert == '' or ipPrintert == False:
+            return make_response(jsonify(
+                message='Required query ip',
+                success=False
+            ), 422)
+
+        thermal = Network(ipPrintert, timeout=5)
+
+        return make_response(
+            jsonify(
+                success=True,
+                message='Connection Successfull Thermal '+ipPrintert
+            ),
+            200
+        )
+    except Exception as e:
+        message = str(e)
+        return make_response(
+            jsonify(
+                success=False,
+                message='Connection Failed Thermal '+ipPrintert,
+                detail=message
+            ),
+            422
+        )
