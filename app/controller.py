@@ -20,8 +20,8 @@ def printEscpos():
     if request.method == "POST":
         # get json data from request
         requestBody = request.get_json()
+        ipPrintert = request.args.get('ip', False)
         fileString = requestBody.get('image', False)
-        ipPrintert = requestBody.get('network', False)
 
         # check required body request
         if fileString == '' or fileString == False:
@@ -31,7 +31,7 @@ def printEscpos():
             ), 422)
         if ipPrintert == '' or ipPrintert == False:
             return make_response(jsonify(
-                message='Required network',
+                message='Required ip in query',
                 success=False
             ), 422)
 
