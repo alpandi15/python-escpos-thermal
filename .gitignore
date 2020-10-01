@@ -1,5 +1,5 @@
 __pycache__/
 virtualenv/
-app/public
+app/public/*
 .env
 *.DS_Store

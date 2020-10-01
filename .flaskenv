@@ -5,3 +5,5 @@ FLASK_DEBUG=1
 FLASK_RUN_HOST=localhost
 FLASK_RUN_PORT=4000
 
+FLASK_RUN_CERT=ssl/cert.pem
+FLASK_RUN_KEY=ssl/key.pem
